@@ -1,51 +1,47 @@
-console.log('app is running');
+const app ={
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of computer',
+  options: [ ]
+}
 
 //JSX - javascript xml
-const template = 
-<div>
-  <h1>Indecision App</h1> 
-  <p>Put your life in the hands of computer</p>
-  <ol>
-    <li>Item one</li>
-    <li>Item two</li>
-  </ol>
-</div>  
+const onFormSubmit = (e) => {
+  e.preventDefault();
+  const option = e.target.elements.option.value;
 
-const user = {
-  name: 'andrew',
-  age: 12
-}
+  if(!option){
+    return;
+  }
 
-let count = 0;
-const addOne = () => {
-  count++;
- 
-  renderApp();
-}
-
-const minusOne = () => {
-  console.log('minusOne');
-}
-
-const reset = () => {
-  console.log('reset');
-}
-
-const appRoot = document.getElementById('app');
-
-const renderApp = () => {
-  const templateOne = (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne.bind(this)}>+1</button>
-      <button onClick={minusOne}>-2</button>
-      <button onClick={reset}>Reset</button>
-    </div>
-  )
-
-// ReactDOM.render(template, appRoot);  
-ReactDOM.render(templateOne, appRoot);
+  app.options.push(option);
+  e.target.elements.option.value = ' ';
+  renderForm();
+  
   
 }
 
-renderApp();
+
+const appRoot = document.getElementById('app');
+const renderForm = () => {
+  const template = (
+    <div>
+        <h1>{app.title}</h1> 
+        {app.subtitle && <p>{app.subtitle}</p>}
+        <p>{app.options.length > 0 ? 'Here are options' : 'No options'}</p>
+        <p>{app.options.length}</p>
+        <ol>
+          <li>Item one</li>
+          <li>Item two</li>
+        </ol>
+        <form onSubmit = {onFormSubmit}>
+          <input type= "text" name = "option" />
+          <button>Add options</button>
+        </form>
+    </div>  
+  );
+  
+  ReactDOM.render(template, appRoot); 
+}
+
+renderForm();
+  
