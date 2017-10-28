@@ -2,7 +2,9 @@
 const app ={
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of computer',
-  options: [ ]
+  options: [ ],
+  decision: null,
+  color: null
 }
 
 const onFormSubmit = (e) => {
@@ -26,8 +28,13 @@ const removeAll= () => {
 }
 
 const onMakeDecision = () => {
+    const color = ['red', 'green', 'yellow', 'pink'];
+    const randomColor = Math.floor(Math.random() * color.length);
     const randomNumber = Math.floor(Math.random() * app.options.length);
     const option = app.options[randomNumber];
+    app.decision = option;
+    app.color = color[randomColor];
+    renderForm();
     
 }
 
@@ -38,7 +45,7 @@ const appRoot = document.getElementById('app');
 const renderForm = () => {
   const template = (
     <div>
-        <h1>{app.title}</h1> 
+        <center><h1>{app.title}</h1>
         {app.subtitle && <p>{app.subtitle}</p>}
         <p>{app.options.length > 0 ? 'Here are options' : 'No options'}</p>
         <p>{app.options.length}</p>
@@ -46,8 +53,9 @@ const renderForm = () => {
         // on click -> wipe the array -> rerender  */}
      
         <button onClick = {removeAll}>Remove All</button>
+        &nbsp;&nbsp;
         <button onClick = {onMakeDecision} >what should i do? </button>
-        <ol>
+        <ol style= {{listStyleType: 'none'}}>
           {/*map over app.options and set key prop*/}
           {/* <li>Item one</li>
           <li>Item two</li> */}
@@ -58,10 +66,17 @@ const renderForm = () => {
             })
           }
         </ol>
+        <ul>
+          {
+             <h1  style= {{color: app.color}}>{app.decision}</h1>
+          }
+              
+        </ul>
         <form onSubmit = {onFormSubmit}>
           <input type= "text" name = "option" />
           <button>Add options</button>
         </form>
+        </center>
     </div>  
   );
   
