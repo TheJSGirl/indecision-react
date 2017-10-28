@@ -1,10 +1,10 @@
+//JSX - javascript xml
 const app ={
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of computer',
   options: [ ]
 }
 
-//JSX - javascript xml
 const onFormSubmit = (e) => {
   e.preventDefault();
   const option = e.target.elements.option.value;
@@ -40,8 +40,15 @@ const renderForm = () => {
         // on click -> wipe the array -> rerender  */}
         <button onClick = {removeAll}>Remove All</button>
         <ol>
-          <li>Item one</li>
-          <li>Item two</li>
+          {/*map over app.options and set key prop*/}
+          {/* <li>Item one</li>
+          <li>Item two</li> */}
+          {
+            app.options.map((option) => {
+              return <li key={option}>{option}</li>;
+               
+            })
+          }
         </ol>
         <form onSubmit = {onFormSubmit}>
           <input type= "text" name = "option" />

@@ -1,12 +1,13 @@
 'use strict';
 
+//JSX - javascript xml
 var app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of computer',
   options: []
+};
 
-  //JSX - javascript xml
-};var onFormSubmit = function onFormSubmit(e) {
+var onFormSubmit = function onFormSubmit(e) {
   e.preventDefault();
   var option = e.target.elements.option.value;
 
@@ -58,16 +59,13 @@ var renderForm = function renderForm() {
     React.createElement(
       'ol',
       null,
-      React.createElement(
-        'li',
-        null,
-        'Item one'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item two'
-      )
+      app.options.map(function (option) {
+        return React.createElement(
+          'li',
+          { key: option },
+          option
+        );
+      })
     ),
     React.createElement(
       'form',
