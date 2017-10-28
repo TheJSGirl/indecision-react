@@ -20,6 +20,13 @@ const onFormSubmit = (e) => {
   
 }
 
+const removeAll= (e) => {
+  e.preventDefault();
+  app.options = [];
+  renderForm(); 
+}
+
+
 
 const appRoot = document.getElementById('app');
 const renderForm = () => {
@@ -29,6 +36,9 @@ const renderForm = () => {
         {app.subtitle && <p>{app.subtitle}</p>}
         <p>{app.options.length > 0 ? 'Here are options' : 'No options'}</p>
         <p>{app.options.length}</p>
+        {/* //create "Remove All" button above list
+        // on click -> wipe the array -> rerender  */}
+        <button onClick = {removeAll}>Remove All</button>
         <ol>
           <li>Item one</li>
           <li>Item two</li>

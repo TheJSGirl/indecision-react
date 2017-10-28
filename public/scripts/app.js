@@ -19,6 +19,12 @@ var app = {
   renderForm();
 };
 
+var removeAll = function removeAll(e) {
+  e.preventDefault();
+  app.options = [];
+  renderForm();
+};
+
 var appRoot = document.getElementById('app');
 var renderForm = function renderForm() {
   var template = React.createElement(
@@ -43,6 +49,11 @@ var renderForm = function renderForm() {
       'p',
       null,
       app.options.length
+    ),
+    React.createElement(
+      'button',
+      { onClick: removeAll },
+      'Remove All'
     ),
     React.createElement(
       'ol',
