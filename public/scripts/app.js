@@ -20,13 +20,18 @@ var onFormSubmit = function onFormSubmit(e) {
   renderForm();
 };
 
-var removeAll = function removeAll(e) {
-  e.preventDefault();
+var removeAll = function removeAll() {
   app.options = [];
   renderForm();
 };
 
+var onMakeDecision = function onMakeDecision() {
+  var randomNumber = Math.floor(Math.random() * app.options.length);
+  var option = app.options[randomNumber];
+};
+
 var appRoot = document.getElementById('app');
+
 var renderForm = function renderForm() {
   var template = React.createElement(
     'div',
@@ -57,12 +62,17 @@ var renderForm = function renderForm() {
       'Remove All'
     ),
     React.createElement(
+      'button',
+      { onClick: onMakeDecision },
+      'what should i do? '
+    ),
+    React.createElement(
       'ol',
       null,
       app.options.map(function (option) {
         return React.createElement(
           'li',
-          { key: option },
+          { key: option, style: { color: 'red' } },
           option
         );
       })

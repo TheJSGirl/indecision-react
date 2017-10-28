@@ -20,15 +20,21 @@ const onFormSubmit = (e) => {
   
 }
 
-const removeAll= (e) => {
-  e.preventDefault();
+const removeAll= () => {
   app.options = [];
   renderForm(); 
+}
+
+const onMakeDecision = () => {
+    const randomNumber = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNumber];
+    
 }
 
 
 
 const appRoot = document.getElementById('app');
+
 const renderForm = () => {
   const template = (
     <div>
@@ -38,14 +44,16 @@ const renderForm = () => {
         <p>{app.options.length}</p>
         {/* //create "Remove All" button above list
         // on click -> wipe the array -> rerender  */}
+     
         <button onClick = {removeAll}>Remove All</button>
+        <button onClick = {onMakeDecision} >what should i do? </button>
         <ol>
           {/*map over app.options and set key prop*/}
           {/* <li>Item one</li>
           <li>Item two</li> */}
           {
             app.options.map((option) => {
-              return <li key={option}>{option}</li>;
+              return <li key={option} style={{color: 'red'}}>{option}</li>;
                
             })
           }
